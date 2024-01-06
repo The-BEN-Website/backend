@@ -126,3 +126,23 @@ class Testimony(models.Model):
 
     def __str__(self):
         return self.title
+
+class Gallery(models.Model):
+    class GalleryObjects(models.Manager):
+        def get_queryset(self):
+            return super().get_queryset().filter(status='published')
+
+    options = (
+        ('draft','Draft'),
+        ('published', 'Published'),
+    )
+
+    title = models.CharField(max_length=250)
+    file = models.FileField(upload_to='uploads/gallery/', blank=True)
+    status = models.CharField(max_length=50, choices=options, default='draft')
+
+    objects = models.Manager()
+    gallery_objects = GalleryObjects()
+
+    def __str__(self):
+        return self.title

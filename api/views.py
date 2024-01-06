@@ -1,6 +1,6 @@
 from rest_framework import generics
-from core.models import Message, Announcement, Song, Testimony
-from .serializers import MessageSerializer, AnnouncementSerializer, SongSerializer, TestimonySerializer
+from core.models import Message, Announcement, Song, Testimony, Gallery
+from .serializers import MessageSerializer, AnnouncementSerializer, SongSerializer, TestimonySerializer, GallerySerializer
 
 # Create your views here.
 class MessageList(generics.ListAPIView):
@@ -8,6 +8,14 @@ class MessageList(generics.ListAPIView):
     serializer_class = MessageSerializer
 
 class MessageDetail(generics.RetrieveAPIView):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+
+class MessageCreateview(generics.CreateAPIView):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+
+class MessageManageView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
 
@@ -37,3 +45,12 @@ class TestimonyList(generics.ListAPIView):
 class TestimonyDetail(generics.RetrieveAPIView):
     queryset = Testimony.objects.all()
     serializer_class = TestimonySerializer
+
+
+class GalleryList(generics.ListAPIView):
+    queryset = Gallery.gallery_objects.all()
+    serializer_class = GallerySerializer
+
+class GalleryDetail(generics.RetrieveAPIView):
+    queryset = Gallery.objects.all()
+    serializer_class = GallerySerializer

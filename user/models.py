@@ -61,6 +61,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
         ICT = "ICT", 'ICT'
         MEDIA = "MEDIA", 'MEDIA'
         PUBLICATION = "PUBLICATION", 'PUBLICATION'
+        MUSIC = "MUSIC", 'MUSIC'
         NIL = "NIL", 'NIL'
 
     base_role = Role.NIL
@@ -125,3 +126,15 @@ class Ict(NewUser):
     class Meta:
         proxy = True 
 
+class MusicManager(BaseUserManager):
+    def get_queryset(self, *args, **kwargs):
+        results = super().get_queryset(*args, **kwargs)
+        return results.filter(role=NewUser.Role.MUSIC)
+    
+class Music(NewUser):
+    base_role = NewUser.Role.MUSIC
+
+    ict = MusicManager()
+
+    class Meta:
+        proxy = True 

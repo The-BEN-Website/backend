@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Message, Announcement, Song, Testimony
+from core.models import Message, Announcement, Song, Testimony, Gallery
 
 
 class MessageSerializer(serializers.ModelSerializer):
@@ -24,4 +24,9 @@ class TestimonySerializer(serializers.ModelSerializer):
     class Meta:
         model = Testimony
         fields = ('id','title','author','content',)
+
+class GallerySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Gallery
+        fields = ('id','title',)
 
