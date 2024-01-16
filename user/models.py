@@ -64,7 +64,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
         MUSIC = "MUSIC", 'MUSIC'
         NIL = "NIL", 'NIL'
 
-    base_role = Role.NIL
+    base_role = Role.ICT
 
     email = models.EmailField(_('email address'), unique=True)
     user_name = models.CharField(max_length=150, unique=True)
